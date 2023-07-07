@@ -20,9 +20,9 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping("/updateStatus")
-    ResponseEntity<HttpStatus> updateStatus( @RequestParam ( "ticketId" ) Long ticketId,
-                         @RequestParam ( "status" ) TicketStatus status){
-        ticketService.updateStatus(Long.toString(ticketId),status);
+    ResponseEntity<HttpStatus> updateStatus( @RequestParam ( "ticketId" ) String ticketId,
+                         @RequestParam ( "status" ) String status){
+        ticketService.updateStatus(ticketId,TicketStatus.valueOf(status));
         return new ResponseEntity<>( HttpStatus.OK );
     }
 

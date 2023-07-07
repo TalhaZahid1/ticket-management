@@ -35,7 +35,7 @@ public class Report {
     @Enumerated(EnumType.STRING)
     private ReportStatus reportStatus;
 
-    private String asignee;
+    private String assignee;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "reportId", referencedColumnName = "reportId")

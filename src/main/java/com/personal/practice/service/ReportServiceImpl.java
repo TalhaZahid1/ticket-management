@@ -7,6 +7,7 @@ import com.personal.practice.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,8 +20,13 @@ public class ReportServiceImpl implements ReportService{
     @Override
     public void assignReport(String assignee, String reportId) {
         Report report = getById(reportId);
-        report.setAsignee(assignee);
+        report.setAssignee(assignee);
         this.reportRepository.saveAndFlush(report);
+    }
+
+    @Override
+    public List<Report> getReports() {
+        return this.reportRepository.findAll();
     }
 
     public Report getById (String reportId)
