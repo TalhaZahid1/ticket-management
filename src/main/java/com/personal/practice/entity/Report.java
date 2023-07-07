@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 import java.util.List;
@@ -15,26 +16,28 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table(name = "ticket")
+@Table(name = "report")
 public class Report {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    private UUID ticketId;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID reportId;
 
-    @Column(name = "updatedDate")
+    @Column(name = "startDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 
-    @Column(name = "updatedDate")
+    @Column(name = "endDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
-    @Enumerated(EnumType.ORDINAL)
-    private ReportStatus status;
+    @Enumerated(EnumType.STRING)
+    private ReportStatus reportStatus;
 
     private String asignee;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reportId", referencedColumnName = "reportId")
     private List<Ticket> ticketsList;
 }

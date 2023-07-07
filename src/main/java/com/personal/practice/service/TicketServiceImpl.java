@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,6 +37,11 @@ public class TicketServiceImpl implements TicketService{
         Ticket ticket = this.getById(ticketId);
         ticket.setTicketStatus(status);
         this.ticketRepository.save(ticket);
+    }
+
+    @Override
+    public List<Ticket> getAll() {
+        return this.ticketRepository.findAll();
     }
 
     public Ticket getById (String ticketId)

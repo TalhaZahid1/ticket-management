@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(name = "/report")
+@RequestMapping("/report")
 public class ReportController {
 
     @Autowired
     private ReportService reportService;
 
-    @PostMapping(name = "/assign")
+    @PostMapping("/assign")
     public ResponseEntity<HttpStatus> assignReport(@RequestParam String assignee,
                                                    @RequestParam String reportId){
         reportService.assignReport(assignee,reportId);

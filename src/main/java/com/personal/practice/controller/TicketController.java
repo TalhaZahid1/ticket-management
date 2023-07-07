@@ -9,19 +9,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
-@RequestMapping(name = "/ticket")
+@RequestMapping("/ticket")
 public class TicketController {
 
     @Autowired
     private TicketService ticketService;
 
-    @PostMapping(name = "/updateStatus")
+    @PostMapping("/updateStatus")
     ResponseEntity<HttpStatus> updateStatus( @RequestParam ( "ticketId" ) Long ticketId,
                          @RequestParam ( "status" ) TicketStatus status){
         ticketService.updateStatus(Long.toString(ticketId),status);
         return new ResponseEntity<>( HttpStatus.OK );
+    }
+
+    @GetMapping("/getAll")
+    List<Ticket> getAll(){
+        return ticketService.getAll();
     }
 
 }
