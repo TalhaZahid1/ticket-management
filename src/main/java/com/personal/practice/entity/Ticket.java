@@ -33,4 +33,9 @@ public class Ticket {
     @Column(name = "updatedDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assigneeId")
+    private Assignee assignee;
+
 }
